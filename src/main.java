@@ -83,14 +83,57 @@ class Interview{
         System.out.println("anagram");
          return true;
     }
+
+    static int minimumOperations(int n)
+    {
+
+        // Storing the minimum operations
+        // to obtain all numbers up to N
+        int operations[] = new int[n + 1];
+
+        // Initilal state
+        operations[1] = 0;
+
+        // Iterate for the remaining numbers
+        for(int i = 2; i <= n; i++)
+        {
+            operations[i] = Integer.MAX_VALUE;
+
+            // If the number can be obtained
+            // by multiplication by 2
+            if (i % 2 == 0)
+            {
+                int x = operations[i / 2];
+                if (x + 1 < operations[i])
+                {
+                    operations[i] = x + 1;
+                }
+            }
+
+
+            // Obtaining the number by adding 1
+            int x = operations[i - 1];
+            if (x + 1 < operations[i])
+            {
+                operations[i] = x + 1;
+            }
+        }
+
+        // Return the minm operations
+        // to obtain n
+        return operations[n]+1;
+    }
+
     public static void main (String []args){
 //        int[][] a = {{1,2,3,4}, {5, 6,7,8},{9,10,11,12},{13,14,15,16}};
 //        spiral(a);
 
-        String a = "LISTEN";
-        String b = "SILENT";
-
-        anagramChecker(a, b);
+//        String a = "LISTEN";
+//        String b = "SILENT";
+//
+//        anagramChecker(a, b);
 //        anagramChecker2(a, b);
+
+//        System.out.println(minimumOperations(7));
     }
 }
